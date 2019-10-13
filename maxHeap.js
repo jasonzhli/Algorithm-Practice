@@ -3,8 +3,9 @@ class MaxBinaryHeap {
     this.values = [41,39,33,18,27,12];
   }
 
-  insert(element) {
-    this.values.push(element);
+  enqueue(val, priority) {
+    let newNode = new Node(val, priority);
+    this.values.push(newNode);
     this.bubbleUp();
   }
 
@@ -14,14 +15,14 @@ class MaxBinaryHeap {
     while (idx > 0) {
       let parentIdx = Math.floor((idx-1)/2);
       let parent = this.values[parentIdx];
-      if (element <= parent) break; 
+      if (element.priority <= parentpriority) break; 
       this.values[parentIdx] = element;
       this.values[idx] = parent;
       idx = parentIdx;
     }
   }
 
-  extractMax() {
+  dequeue() {
     const max = this.values[0];
     const end = this.values.pop();
     if (this.values.length > 0) {
@@ -42,7 +43,7 @@ class MaxBinaryHeap {
       let swap = null;
       if (leftChildIdx < length) {
         leftChild = this.values[leftChildIdx];
-        if (leftChild > element) {
+        if (leftChild.priority > element.priority) {
           swap = leftChildIdx;
         }
       }
@@ -61,4 +62,14 @@ class MaxBinaryHeap {
   }
 }
 
-let heal = new MaxBinaryHeap();
+class Node {
+  constructor(val, priority) {
+    this.val = val;
+    this.priority = priority;
+  }
+}
+
+let ER = new PriorirtyQueue();
+ER.enqueue("common cold", 1);
+ER.enqueue("gunshot wound", 5)
+ER.enqueue("high fever", 2)
